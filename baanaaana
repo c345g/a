@@ -4,8 +4,9 @@ if _G.ALAUTOFARM then
     return
 end
 _G.ALAUTOFARM = true
-queue_on_teleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/c345g/a/refs/heads/main/baanaaana'))()")
+
 if not game:IsLoaded() then game.Loaded:Wait() end
+queue_on_teleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/c345g/a/refs/heads/main/baanaaana'))()")
 
 _G.BlockingOn = true
 
