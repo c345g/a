@@ -45,15 +45,15 @@ game:GetService("UserInputService").InputBegan:Connect(function(key,proc)
                     Text = "Disable Farm"
             })
         end
-	else if key.KeyCode == Enum.KeyCode.RightBracket then
+	elseif key.KeyCode == Enum.KeyCode.RightBracket then
 		queueTP()
-                pcall(function()
-                    game:GetService("TeleportService"):Teleport(vipPlaceId, game.Players.LocalPlayer)
-                    game:GetService("StarterGui"):SetCore("SendNotification", {
-                    Title = "Teleporting!",
-                    Text = "MOVING TO PROS!!!"
-                })
-                end)
+        pcall(function()
+                game:GetService("TeleportService"):Teleport(vipPlaceId, game.Players.LocalPlayer)
+                game:GetService("StarterGui"):SetCore("SendNotification", {
+                Title = "Teleporting!",
+                Text = "MOVING TO PROS!!!"
+            })
+        end)
     end
 end)
 
