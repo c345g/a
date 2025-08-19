@@ -1,1 +1,192 @@
+print("STARTING")
+if _G.ALAUTOFARM then
+    print("ALREADY STARTED")
+    return
+end
+_G.ALAUTOFARM = true
 
+repeat task.wait()
+until game:IsLoaded()
+pcall(function()
+	queue_on_teleport("loadstring(game:HttpGet('https://pastebin.com/raw/tMYFW7wR'))()")
+end)
+
+_G.BlockingOn = true
+
+game:GetService("UserInputService").InputBegan:Connect(function(key,proc)
+    if proc then return end
+    if key.KeyCode == Enum.KeyCode.LeftBracket then
+        if isfile("ALAutofarm") then
+            delfile("ALAutofarm")
+        else
+            writefile("ALAutofarm","")
+            game:GetService("StarterGui"):SetCore("SendNotification", {
+                    Title = "Disabled!",
+                    Text = "Disable Farm"
+            })
+        end
+    end
+end)
+
+if isfile("ALAutofarm") then
+    while task.wait(1) do
+        if not isfile("ALAutofarm") then
+            game:GetService("StarterGui"):SetCore("SendNotification", {
+                    Title = "Activated!",
+                    Text = "Activated Farm"
+            })
+            break
+        end
+    end
+end
+
+local VirtualInputManager = game:GetService("VirtualInputManager")
+
+    local function clickButton(button)
+    button.AnchorPoint = Vector2.new(0,0)
+    local guiInset = game:GetService("GuiService"):GetGuiInset()
+    local pos = button.AbsolutePosition
+    local size = button.AbsoluteSize
+    local x = (pos.X + size.X / 2) + guiInset.X
+    local y = (pos.Y + size.Y / 2) + guiInset.Y
+    VirtualInputManager:SendMouseButtonEvent(x, y, 0, true, game, 0)
+    task.wait()
+    VirtualInputManager:SendMouseButtonEvent(x, y, 0, false, game, 0)
+    end
+
+    local function blockRandom()
+        if not _G.BlockingOn then 
+            return
+        end
+        local playerList = game.Players:GetPlayers()
+        local randomPlayer = nil
+
+        repeat randomPlayer = playerList[math.random(1,#playerList)]
+            task.wait()
+        until randomPlayer and randomPlayer ~= game.Players.LocalPlayer
+        
+        repeat 
+        game:GetService("StarterGui"):SetCore("PromptBlockPlayer",randomPlayer)
+        task.wait()
+        until game:GetService("CoreGui"):FindFirstChild("BlockingModalScreen")
+        task.wait()
+        repeat
+            pcall(function() 
+            clickButton(game:GetService("CoreGui").BlockingModalScreen.BlockingModalContainer.BlockingModalContainerWrapper.BlockingModal.AlertModal.AlertContents.Footer.Buttons["3"])
+            end)
+            task.wait()
+        until not game:GetService("CoreGui"):FindFirstChild("BlockingModalScreen")
+    end
+
+
+--local PlaceId = 85547073091480
+local PlaceId = game.PlaceId
+
+local function newServer()
+        coroutine.wrap(function()
+            while true do
+                pcall(function()
+                    game:GetService("TeleportService"):Teleport(PlaceId, game.Players.LocalPlayer)
+                    game:GetService("StarterGui"):SetCore("SendNotification", {
+                    Title = "Teleporting!",
+                    Text = "NEW SERVER"
+                })
+                end)
+                task.wait(1)
+            end
+        end)()
+end
+
+local blockedIds = game:GetService("StarterGui"):GetCore("GetBlockedUserIds")
+
+local foundBlocked = false
+for i,plr in game.Players:GetPlayers() do
+    if table.find(blockedIds,plr.UserId) then
+        foundBlocked = true
+        game:GetService("StarterGui"):SetCore("PromptUnblockPlayer",game.Players:GetPlayerByUserId(plr.UserId))
+        repeat task.wait()
+        until game:GetService("CoreGui").RobloxGui.PromptDialog.Visible == true 
+        repeat
+            pcall(function()
+                clickButton(game:GetService("CoreGui").RobloxGui.PromptDialog.ContainerFrame.ConfirmButton)
+            end)
+        until game:GetService("CoreGui").RobloxGui.PromptDialog.Visible == false
+    end
+end
+
+if foundBlocked then
+    newServer()
+end
+game:GetService("CoreGui").RobloxPromptGui.promptOverlay.ChildAdded:Connect(function(v)
+    if v.Name == "ErrorPrompt" then
+        newServer()
+    end
+end)
+if game:GetService("CoreGui").RobloxPromptGui.promptOverlay:FindFirstChild("ErrorPrompt") then
+    newServer()
+end
+
+local escape = CFrame.new(Vector3.new(-35, 520, 500))
+local escape2 = CFrame.new(Vector3.new(-2, 505, 458))
+local safe = CFrame.new(Vector3.new(0,520,537))
+
+    local toolong = false
+    coroutine.wrap(function()
+        task.wait(3)
+        toolong = true
+        task.wait(50)
+        newServer()
+    end)()
+    repeat 
+    pcall(function()   
+    local r = game:GetService("ReplicatedStorage").Remote.TeamChange:InvokeServer(game:GetService("Teams").PATIENT,"Patient")
+    if r then 
+        game:GetService("ReplicatedStorage").Remote.AnalyticsEvent:FireServer("Funnel","Title Screen","Selected Team") 
+    end
+    end)
+    if game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+        game.Players.LocalPlayer.Character:PivotTo(safe)
+    end
+    if toolong then
+        break
+    end
+    task.wait()
+    until game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and game.Players.LocalPlayer:GetAttribute("CharacterLoaded") and game.Players.LocalPlayer:GetAttribute("GameAnalyticsLoaded")
+    local escapeNum = game.Players.LocalPlayer.Configuration_Statistics:GetAttribute("Escapes")
+    coroutine.wrap(function()
+        repeat
+    game.Players.LocalPlayer.Character:PivotTo(escape)
+    task.wait(.05)
+    until game.Players.LocalPlayer:GetAttribute("IsEscaping") == true and escapeNum < game.Players.LocalPlayer.Configuration_Statistics:GetAttribute("Escapes")
+    game.Players.LocalPlayer.Character:PivotTo(escape2)
+    pcall(function()
+        coroutine.wrap(function()
+            blockRandom()
+        end)()
+    end)
+    coroutine.wrap(function()
+        local message = {
+    ["content"] = "```**Asylum Life**".."\nServer: "..game.JobId.."\nEscapes:"..game.Players.LocalPlayer.Configuration_Statistics:GetAttribute("Escapes").."\nMunyun: "..game.Players.LocalPlayer.Configuration_Statistics:GetAttribute("Points").."\nLevel: "..game.Players.LocalPlayer:GetAttribute("CurrentTeamLevel").."\nEXP: "..game.Players.LocalPlayer:GetAttribute("CurrentTeamExp").."\nTime: "..os.date().."```"
+}
+
+local params = {
+    Url = "https://discord.com/api/webhooks/1193502946671988829/a8bFrZq1Ai4LBeFcXP9k--YpEYJWiZT9w3owpP9WD00lBq43CB9aZd1IJGAPVym35xYD",
+    Method = "POST",
+    Headers = {
+            ["Content-Type"] = "application/json"  -- When sending JSON, set this!
+        },
+    Body = game:GetService("HttpService"):JSONEncode(message)
+}
+
+pcall(function()
+    coroutine.wrap(function()
+        request(params)
+    end)()
+end)
+    end)()
+    task.wait(1)
+    newServer()
+    end)()
+    task.wait(3)
+    game.Players.LocalPlayer:SetAttribute("IsEscaping",true)
+    escapeNum = -1
