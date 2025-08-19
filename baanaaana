@@ -166,7 +166,7 @@ print("Starting loading player")
         break
     end
     task.wait(.05)
-    until game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and game.Players.LocalPlayer:GetAttribute("CharacterLoaded") and game.Players.LocalPlayer:GetAttribute("GameAnalyticsLoaded")
+    until game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and game.Players.LocalPlayer:GetAttribute("CharacterLoaded")
     local escapeNum = game.Players.LocalPlayer.Configuration_Statistics:GetAttribute("Escapes")
 print("Starting Character TP")
     coroutine.wrap(function()
