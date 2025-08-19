@@ -1,3 +1,10 @@
+local fileContent = ""
+if not isfile("ALAUTOFARM.txt") then
+	writefile("ALAUTOFARM.txt", "ACTIVE")
+	fileContent = "ACTIVE"
+else
+	fileContent = readfile("ALAUTOFARM.txt")
+end
 print("LOADING")
 repeat wait()
 until game:IsLoaded()
@@ -23,10 +30,12 @@ queueTP()
 game:GetService("UserInputService").InputBegan:Connect(function(key,proc)
     if proc then return end
     if key.KeyCode == Enum.KeyCode.LeftBracket then
-        if STOPFARM then
-            pcall(function() getgenv().STOPFARM = false end)
+        if fileContent == "ACTIVE" then
+            writefile("ALAUTOFARM.txt", "ACTIVE")
+			fileContent = "ACTIVE"
         else
-            pcall(function() getgenv().STOPFARM = true end)
+            writefile("ALAUTOFARM.txt", "INACTIVE")
+			fileContent = "INACTIVE"
             game:GetService("StarterGui"):SetCore("SendNotification", {
                     Title = "Disabled!",
                     Text = "Disable Farm"
@@ -36,10 +45,10 @@ game:GetService("UserInputService").InputBegan:Connect(function(key,proc)
 end)
 
 print("Checking for stoppage")
-if STOPFARM then
+if fileContent == "INACTIVE" then
 	print("STOPPED")
-    while task.wait(1) do
-        if not STOPFARM then
+    while task.wait(.5) do
+        if fileContent == "ACTIVE" then
             game:GetService("StarterGui"):SetCore("SendNotification", {
                     Title = "Activated!",
                     Text = "Activated Farm"
