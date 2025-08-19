@@ -23,10 +23,10 @@ queueTP()
 game:GetService("UserInputService").InputBegan:Connect(function(key,proc)
     if proc then return end
     if key.KeyCode == Enum.KeyCode.LeftBracket then
-        if isfile("ALAutofarm") then
-            delfile("ALAutofarm")
+        if STOPFARM then
+            pcall(function() getgenv().STOPFARM = false end)
         else
-            writefile("ALAutofarm","")
+            pcall(function() getgenv().STOPFARM = true end)
             game:GetService("StarterGui"):SetCore("SendNotification", {
                     Title = "Disabled!",
                     Text = "Disable Farm"
@@ -35,11 +35,11 @@ game:GetService("UserInputService").InputBegan:Connect(function(key,proc)
     end
 end)
 
-print("Checking for file")
-if isfile("ALAutofarm") then
-	print("Has File")
+print("Checking for stoppage")
+if STOPFARM then
+	print("STOPPED")
     while task.wait(1) do
-        if not isfile("ALAutofarm") then
+        if not STOPFARM then
             game:GetService("StarterGui"):SetCore("SendNotification", {
                     Title = "Activated!",
                     Text = "Activated Farm"
