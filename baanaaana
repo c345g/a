@@ -141,7 +141,7 @@ local safe = CFrame.new(Vector3.new(0,520,537))
     coroutine.wrap(function()
         task.wait(3)
         toolong = true
-        task.wait(50)
+        task.wait(25)
         newServer()
     end)()
     repeat 
@@ -159,7 +159,7 @@ local safe = CFrame.new(Vector3.new(0,520,537))
     if toolong then
         break
     end
-    task.wait()
+    task.wait(.05)
     until game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and game.Players.LocalPlayer:GetAttribute("CharacterLoaded") and game.Players.LocalPlayer:GetAttribute("GameAnalyticsLoaded")
     local escapeNum = game.Players.LocalPlayer.Configuration_Statistics:GetAttribute("Escapes")
     coroutine.wrap(function()
