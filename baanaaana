@@ -7,12 +7,17 @@ if _G.ALAUTOFARM then
 end
 _G.ALAUTOFARM = true
 
-local success,result = pcall(function()
-	queue_on_teleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/c345g/a/refs/heads/main/baanaaana'))()")
-end)
-if not success then
-	print("queue failed: "..result)
+local function queueTP()
+	local success,result = pcall(function()
+		queue_on_teleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/c345g/a/refs/heads/main/baanaaana'))()")
+	end)
+	if not success then
+		print("queue failed: "..result)
+	else
+		print("queued TP")
+	end
 end
+queueTP()
 
 
 game:GetService("UserInputService").InputBegan:Connect(function(key,proc)
@@ -92,6 +97,7 @@ local PlaceId = game.PlaceId
 local function newServer()
         coroutine.wrap(function()
             while true do
+				queueTP()
                 pcall(function()
                     game:GetService("TeleportService"):Teleport(PlaceId, game.Players.LocalPlayer)
                     game:GetService("StarterGui"):SetCore("SendNotification", {
