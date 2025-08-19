@@ -186,9 +186,7 @@ local params = {
 }
 
 pcall(function()
-    coroutine.wrap(function()
-        request(params)
-    end)()
+    request(params)
 end)
     end)()
     task.wait(1)
