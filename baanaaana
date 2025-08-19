@@ -14,7 +14,6 @@ if not success then
 	print("queue failed: "..result)
 end
 
-_G.BlockingOn = true
 
 game:GetService("UserInputService").InputBegan:Connect(function(key,proc)
     if proc then return end
@@ -31,7 +30,9 @@ game:GetService("UserInputService").InputBegan:Connect(function(key,proc)
     end
 end)
 
+print("Checking for file")
 if isfile("ALAutofarm") then
+	print("Has File")
     while task.wait(1) do
         if not isfile("ALAutofarm") then
             game:GetService("StarterGui"):SetCore("SendNotification", {
@@ -63,9 +64,7 @@ local VirtualInputManager = game:GetService("VirtualInputManager")
     end
 
     local function blockRandom()
-        if not _G.BlockingOn then 
-            return
-        end
+        
         local playerList = game.Players:GetPlayers()
         local randomPlayer = nil
 
