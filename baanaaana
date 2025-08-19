@@ -1,3 +1,5 @@
+repeat task.wait()
+until game:IsLoaded()
 print("STARTING")
 if _G.ALAUTOFARM then
     print("ALREADY STARTED")
@@ -5,8 +7,6 @@ if _G.ALAUTOFARM then
 end
 _G.ALAUTOFARM = true
 
-repeat task.wait()
-until game:IsLoaded()
 pcall(function()
 	queue_on_teleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/c345g/a/refs/heads/main/baanaaana'))()")
 end)
