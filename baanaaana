@@ -10,11 +10,10 @@ _G.ALAUTOFARM = true
 local function queueTP()
 	local success,result = pcall(function()
 		queue_on_teleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/c345g/a/refs/heads/main/baanaaana'))()")
+		print("queued TP")
 	end)
 	if not success then
 		print("queue failed: "..result)
-	else
-		print("queued TP")
 	end
 end
 queueTP()
