@@ -4,13 +4,13 @@ if _G.ALAUTOFARM then
     return
 end
 _G.ALAUTOFARM = true
-
+print("7")
 repeat task.wait()
 until game:IsLoaded()
 pcall(function()
 	queue_on_teleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/c345g/a/refs/heads/main/baanaaana'))()")
 end)
-
+print("13")
 _G.BlockingOn = true
 
 game:GetService("UserInputService").InputBegan:Connect(function(key,proc)
@@ -27,7 +27,7 @@ game:GetService("UserInputService").InputBegan:Connect(function(key,proc)
         end
     end
 end)
-
+print("30")
 if isfile("ALAutofarm") then
     while task.wait(1) do
         if not isfile("ALAutofarm") then
@@ -39,7 +39,7 @@ if isfile("ALAutofarm") then
         end
     end
 end
-
+print("42")
 local VirtualInputManager = game:GetService("VirtualInputManager")
 
     local function clickButton(button)
@@ -78,7 +78,7 @@ local VirtualInputManager = game:GetService("VirtualInputManager")
         until not game:GetService("CoreGui"):FindFirstChild("BlockingModalScreen")
     end
 
-
+print("81")
 --local PlaceId = 85547073091480
 local PlaceId = game.PlaceId
 
@@ -98,7 +98,7 @@ local function newServer()
 end
 
 local blockedIds = game:GetService("StarterGui"):GetCore("GetBlockedUserIds")
-
+print("101")
 local foundBlocked = false
 for i,plr in game.Players:GetPlayers() do
     if table.find(blockedIds,plr.UserId) then
@@ -125,6 +125,7 @@ end)
 if game:GetService("CoreGui").RobloxPromptGui.promptOverlay:FindFirstChild("ErrorPrompt") then
     newServer()
 end
+print("128")
 
 local escape = CFrame.new(Vector3.new(-35, 520, 500))
 local escape2 = CFrame.new(Vector3.new(-2, 505, 458))
