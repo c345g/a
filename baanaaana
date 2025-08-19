@@ -189,7 +189,7 @@ end)
     end)
     coroutine.wrap(function()
         local message = {
-    ["content"] = "```@everyone".."\nServer: "..game.JobId.."\nEscapes:"..game.Players.LocalPlayer.Configuration_Statistics:GetAttribute("Escapes").."\nMunyun: "..game.Players.LocalPlayer.Configuration_Statistics:GetAttribute("Points").."\nLevel: "..game.Players.LocalPlayer:GetAttribute("CurrentTeamLevel").."\nEXP: "..game.Players.LocalPlayer:GetAttribute("CurrentTeamExp").."\nTime: "..os.date().."```"
+    ["content"] = "@everyone ```***ASYLUM!!!\nServer: "..game.JobId.."\nEscapes:"..game.Players.LocalPlayer.Configuration_Statistics:GetAttribute("Escapes").."\nMunyun: "..game.Players.LocalPlayer.Configuration_Statistics:GetAttribute("Points").."\nLevel: "..game.Players.LocalPlayer:GetAttribute("CurrentTeamLevel").."\nEXP: "..game.Players.LocalPlayer:GetAttribute("CurrentTeamExp").."\nTime: "..os.date().."```"
 }
 
 local params = {
