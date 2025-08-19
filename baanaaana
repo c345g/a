@@ -152,7 +152,9 @@ local safe = CFrame.new(Vector3.new(0,520,537))
     end
     end)
     if game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
-        game.Players.LocalPlayer.Character:PivotTo(safe)
+        pcall(function()
+			game.Players.LocalPlayer.Character:PivotTo(safe)
+		end)
     end
     if toolong then
         break
@@ -162,7 +164,9 @@ local safe = CFrame.new(Vector3.new(0,520,537))
     local escapeNum = game.Players.LocalPlayer.Configuration_Statistics:GetAttribute("Escapes")
     coroutine.wrap(function()
         repeat
+pcall(function()
     game.Players.LocalPlayer.Character:PivotTo(escape)
+end)
     task.wait(.05)
     until game.Players.LocalPlayer:GetAttribute("IsEscaping") == true and escapeNum < game.Players.LocalPlayer.Configuration_Statistics:GetAttribute("Escapes")
     game.Players.LocalPlayer.Character:PivotTo(escape2)
