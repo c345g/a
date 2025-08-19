@@ -14,7 +14,10 @@ if _G.ALAUTOFARM then
     print("ALREADY STARTED")
     return
 end
+
 _G.ALAUTOFARM = true
+local vipPlaceId = 85547073091480
+local PlaceId = game.PlaceId
 
 local function queueTP()
 	local success,result = pcall(function()
@@ -42,6 +45,15 @@ game:GetService("UserInputService").InputBegan:Connect(function(key,proc)
                     Text = "Disable Farm"
             })
         end
+	else if key.KeyCode == Enum.KeyCode.RightBracket then
+		queueTP()
+                pcall(function()
+                    game:GetService("TeleportService"):Teleport(vipPlaceId, game.Players.LocalPlayer)
+                    game:GetService("StarterGui"):SetCore("SendNotification", {
+                    Title = "Teleporting!",
+                    Text = "MOVING TO PROS!!!"
+                })
+                end)
     end
 end)
 
@@ -100,9 +112,6 @@ local VirtualInputManager = game:GetService("VirtualInputManager")
         until not game:GetService("CoreGui"):FindFirstChild("BlockingModalScreen")
     end
 
-
---local PlaceId = 85547073091480
-local PlaceId = game.PlaceId
 
 local function newServer()
         coroutine.wrap(function()
