@@ -1,4 +1,5 @@
-local fileContent = ""
+
+local fileContent = "ACTIVE"
 if not isfile("ALAUTOFARM.txt") then
 	writefile("ALAUTOFARM.txt", "ACTIVE")
 	fileContent = "ACTIVE"
