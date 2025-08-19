@@ -7,9 +7,12 @@ if _G.ALAUTOFARM then
 end
 _G.ALAUTOFARM = true
 
-pcall(function()
+local success,result = pcall(function()
 	queue_on_teleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/c345g/a/refs/heads/main/baanaaana'))()")
 end)
+if not success then
+	print("queue failed: "..result)
+end
 
 _G.BlockingOn = true
 
@@ -102,6 +105,7 @@ local function newServer()
         end)()
 end
 
+print("Getting Blocked Players")
 local blockedIds = game:GetService("StarterGui"):GetCore("GetBlockedUserIds")
 
 local foundBlocked = false
@@ -123,6 +127,7 @@ end
 if foundBlocked then
     newServer()
 end
+print("Detecting Kick")
 game:GetService("CoreGui").RobloxPromptGui.promptOverlay.ChildAdded:Connect(function(v)
     if v.Name == "ErrorPrompt" then
         newServer()
@@ -136,7 +141,7 @@ end
 local escape = CFrame.new(Vector3.new(-35, 520, 500))
 local escape2 = CFrame.new(Vector3.new(-2, 505, 458))
 local safe = CFrame.new(Vector3.new(0,520,537))
-
+print("Setting first coroutine")
     local toolong = false
     coroutine.wrap(function()
         task.wait(3)
@@ -144,6 +149,7 @@ local safe = CFrame.new(Vector3.new(0,520,537))
         task.wait(25)
         newServer()
     end)()
+print("Starting loading player")
     repeat 
     pcall(function()   
     local r = game:GetService("ReplicatedStorage").Remote.TeamChange:InvokeServer(game:GetService("Teams").PATIENT,"Patient")
@@ -162,6 +168,7 @@ local safe = CFrame.new(Vector3.new(0,520,537))
     task.wait(.05)
     until game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and game.Players.LocalPlayer:GetAttribute("CharacterLoaded") and game.Players.LocalPlayer:GetAttribute("GameAnalyticsLoaded")
     local escapeNum = game.Players.LocalPlayer.Configuration_Statistics:GetAttribute("Escapes")
+print("Starting Character TP")
     coroutine.wrap(function()
         repeat
 pcall(function()
