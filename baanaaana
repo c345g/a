@@ -36,6 +36,11 @@ if isfile("ALAutofarm") then
                     Text = "Activated Farm"
             })
             break
+		else
+			 game:GetService("StarterGui"):SetCore("SendNotification", {
+                    Title = "Farm is disabled",
+                    Text = "!!!!!"
+            })
         end
     end
 end
@@ -110,6 +115,7 @@ for i,plr in game.Players:GetPlayers() do
             pcall(function()
                 clickButton(game:GetService("CoreGui").RobloxGui.PromptDialog.ContainerFrame.ConfirmButton)
             end)
+		task.wait()
         until game:GetService("CoreGui").RobloxGui.PromptDialog.Visible == false
     end
 end
