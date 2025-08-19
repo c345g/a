@@ -8,7 +8,7 @@ _G.ALAUTOFARM = true
 repeat task.wait()
 until game:IsLoaded()
 pcall(function()
-	queue_on_teleport("loadstring(game:HttpGet('https://pastebin.com/raw/tMYFW7wR'))()")
+	queue_on_teleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/c345g/a/refs/heads/main/baanaaana'))()")
 end)
 
 _G.BlockingOn = true
