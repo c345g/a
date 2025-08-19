@@ -31,7 +31,7 @@ queueTP()
 game:GetService("UserInputService").InputBegan:Connect(function(key,proc)
     if proc then return end
     if key.KeyCode == Enum.KeyCode.LeftBracket then
-        if fileContent == "ACTIVE" then
+        if fileContent == "INACTIVE" then
             writefile("ALAUTOFARM.txt", "ACTIVE")
 			fileContent = "ACTIVE"
         else
